@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static SceneController Instance { get; private set; }
     public SceneName CurrentScene => _currentScene;
     [SerializeField] private Image _fadePanel;
     [SerializeField] private float _fadeDuration = 0.5f;
