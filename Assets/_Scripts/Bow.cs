@@ -69,6 +69,7 @@ public class Bow : MonoBehaviour
     {
         Vector2 mouseWorldPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
         Vector2 pullVector = (Vector2)_tr.position - mouseWorldPos;
+        pullVector = Vector2.ClampMagnitude(pullVector, _maxPullDistance);
         if (pullVector.sqrMagnitude < 0.0001f) return pullVector;
 
         Vector2 shootDir = pullVector.normalized;

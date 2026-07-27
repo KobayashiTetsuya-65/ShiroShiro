@@ -279,7 +279,7 @@ MonoBehaviour:
   _arrowPrefab: {fileID: 1090294901424548121, guid: 1e96571bb93ed26459ab09828f70acaf, type: 3}
   _firePoint: {fileID: 1786484263}
   _maxPullDistance: 1
-  _maxPower: 10
+  _maxPower: 15
   _grabRadius: 1
   _angleOffset: 90
   _maxAngleFromUp: 90
