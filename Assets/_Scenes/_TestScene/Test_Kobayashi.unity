@@ -280,7 +280,7 @@ MonoBehaviour:
   _firePoint: {fileID: 1786484263}
   _maxPullDistance: 1
   _maxPower: 15
-  _grabRadius: 1
+  _grabTime: 0.1
   _angleOffset: 90
   _maxAngleFromUp: 90
 --- !u!212 &362075547

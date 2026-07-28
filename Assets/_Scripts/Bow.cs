@@ -13,12 +13,14 @@ public class Bow : MonoBehaviour
     [Header("-----ÉpÉâÉÅÅ[É^í≤êÆ-----")]
     [SerializeField] private float _maxPullDistance = 3f;
     [SerializeField] private float _maxPower = 20f;
-    [SerializeField] private float _grabRadius = 1f;
+    [SerializeField] private float _grabTime = 1f;
     [SerializeField] private float _angleOffset = 90f;
     [SerializeField, Range(0f, 90f)] private float _maxAngleFromUp = 90f;
 
     private Transform _tr;
+    private float _timer;
     private bool _isDragging = false;
+    private Vector2 _pressPos;
     private void Awake()
     {
         _tr = transform;
@@ -33,6 +35,7 @@ public class Bow : MonoBehaviour
     {
         _pressAction.Enable();
         _pointAction.Enable();
+        _timer = 0;
     }
     private void OnDisable()
     {
@@ -40,10 +43,7 @@ public class Bow : MonoBehaviour
     }
     private void OnPressStart(InputAction.CallbackContext ctx)
     {
-        Vector2 pressWorldPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
-        float distance = Vector2.Distance(_tr.position, pressWorldPos);
-
-        if (distance > _grabRadius) return;
+        _pressPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
 
         _isDragging = true;
         enabled = true;
@@ -53,14 +53,18 @@ public class Bow : MonoBehaviour
     {
         if (!_isDragging) return;
 
-        Vector2 pull = GetPullVector();
-        Shoot(pull);
         _isDragging = false;
         enabled = false;
+        if (_timer <= _grabTime) return;
+        Vector2 pull = GetPullVector();
+        Shoot(pull);
     }
 
     void Update()
     {
+        _timer += Time.deltaTime;
+        if (_timer <= _grabTime) return;
+
         Vector2 pullVector = GetPullVector();
         float angle = Mathf.Atan2(-pullVector.y, -pullVector.x) * Mathf.Rad2Deg + _angleOffset;
         _tr.rotation = Quaternion.Euler(0f, 0f, angle);
@@ -68,7 +72,7 @@ public class Bow : MonoBehaviour
     private Vector2 GetPullVector()
     {
         Vector2 mouseWorldPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
-        Vector2 pullVector = (Vector2)_tr.position - mouseWorldPos;
+        Vector2 pullVector = _pressPos - mouseWorldPos;
         pullVector = Vector2.ClampMagnitude(pullVector, _maxPullDistance);
         if (pullVector.sqrMagnitude < 0.0001f) return pullVector;
 
