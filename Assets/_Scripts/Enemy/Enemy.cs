@@ -3,12 +3,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IHitable
 {
-    public Action<Enemy> onDead;
+    public event Action<Enemy> OnReturn;
     public int Score => _enemyData.Score;
-    public EnemyDataSO Data => _enemyData;
+    public EnemyStatusSO Data => _enemyData;
+    public int EnemyID { get; private set; }
 
     [Header("エネミーデータ")]
-    [SerializeField] private EnemyDataSO _enemyData;
+    [SerializeField] private EnemyStatusSO _enemyData;
+
+    public void Initialize(int enemyID)
+    {
+        EnemyID = enemyID;
+    }
 
     private void Start()
     {
@@ -22,13 +28,11 @@ public class Enemy : MonoBehaviour, IHitable
 
     public void HitArrow()
     {
-        Dead();
+        Return();
     }
 
-    private void Dead()
+    private void Return()
     {
-        onDead?.Invoke(this);
-
-        Destroy(gameObject);
+        OnReturn?.Invoke(this);
     }
 }

@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d45f8291fb851b4fb1b9a284d194525, type: 3}
-  m_Name: 01_EnemyData
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
-  Score: 10
-  MoveSpeed: 2
-  MoveStrategy: {fileID: 11400000, guid: 6254e41844e01bc4c823b46ee3032aa5, type: 2}
+  m_Script: {fileID: 11500000, guid: aa3df247fce9442468738d150f9ab4a3, type: 3}
+  m_Name: StageData
+  m_EditorClassIdentifier: Assembly-CSharp::StageDataSO
+  Waves:
+  - StartTime: 0
+    EndTime: 30
+    SpawnPerSecond: 2
+    Enemies:
+    - EnemyID: 1
+      Weight: 100

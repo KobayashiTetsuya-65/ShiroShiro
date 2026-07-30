@@ -31,7 +31,9 @@ public class Arrow : MonoBehaviour
         {
             obj.HitArrow();
         }
-
-        _isStuck = true;
+        else
+        {
+            _isStuck = true;
+        }
     }
 }
