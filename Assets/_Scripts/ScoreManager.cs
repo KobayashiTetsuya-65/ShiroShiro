@@ -43,7 +43,7 @@ public class ScoreManager : MonoBehaviour
     }
     private void Update()
     {
-        if (_isStop) return;
+        if (_isStop || GamePauseManager.IsPaused) return;
 
         _currentTime -= _timeSpeed * Time.deltaTime;
         ChangeTimerGauge();

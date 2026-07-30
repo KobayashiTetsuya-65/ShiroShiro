@@ -11,9 +11,25 @@ public class Arrow : MonoBehaviour
 
     private bool _isStuck = false;
 
+    private bool _beforePause = false;
+    private Vector2 _savedVelocity;
+
     private void Update()
     {
-        if (_isStuck) return;
+        if(GamePauseManager.IsPaused != _beforePause)
+        {
+            if(GamePauseManager.IsPaused)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
+            _beforePause = GamePauseManager.IsPaused;
+        }
+
+        if (_isStuck || GamePauseManager.IsPaused) return;
 
         if(_rb.linearVelocity.sqrMagnitude > 0.01f)
         {
@@ -34,6 +50,20 @@ public class Arrow : MonoBehaviour
         else
         {
             _isStuck = true;
+            Destroy(gameObject);
         }
+    }
+
+    private void Pause()
+    {
+        _savedVelocity = _rb.linearVelocity;
+        _rb.linearVelocity = Vector2.zero;
+        _rb.simulated = false;
+    }
+
+    private void Resume()
+    {
+        _rb.simulated = true;
+        _rb.linearVelocity = _savedVelocity;
     }
 }

@@ -24,8 +24,6 @@ public class EnemyPool : MonoBehaviour
 
         Enemy prefab = _enemyDataBase.GetEnemyData(enemyID).EnemyObject;
 
-        Debug.Log(prefab.GetType());
-
         Enemy newEnemy = Instantiate(prefab).GetComponent<Enemy>();
 
         newEnemy.OnReturn += Return;
