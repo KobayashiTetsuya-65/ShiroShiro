@@ -15,7 +15,7 @@ MonoBehaviour:
   Waves:
   - StartTime: 0
     EndTime: 30
-    SpawnPerSecond: 2
+    SpawnPerSecond: 1
     Enemies:
     - EnemyID: 1
       Weight: 100

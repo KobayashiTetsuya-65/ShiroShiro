@@ -50,6 +50,7 @@ public class Arrow : MonoBehaviour
         else
         {
             _isStuck = true;
+            Destroy(gameObject);
         }
     }
 
