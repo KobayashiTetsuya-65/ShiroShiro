@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour, IHitable
 
     private void Update()
     {
+        if(GamePauseManager.IsPaused) return;
         _enemyData.MoveStrategy.Move(this);
     }
 
