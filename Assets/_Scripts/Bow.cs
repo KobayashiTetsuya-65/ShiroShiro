@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class Bow : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class Bow : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject _arrowPrefab;
     [SerializeField] private Transform _firePoint;
+    [SerializeField] private Transform _arrowTr;
 
     [Header("-----ÉpÉâÉÅÅ[É^í≤êÆ-----")]
     [SerializeField] private float _maxPullDistance = 3f;
     [SerializeField] private float _maxPower = 20f;
+    [SerializeField] private Vector3 _minArrowSize = Vector3.zero;
+    [SerializeField] private Vector3 _maxArrowSize = Vector3.one * 1.5f;
     [SerializeField] private float _grabTime = 1f;
     [SerializeField] private float _angleOffset = 90f;
     [SerializeField, Range(0f, 90f)] private float _maxAngleFromUp = 90f;
@@ -36,10 +40,13 @@ public class Bow : MonoBehaviour
         _pressAction.Enable();
         _pointAction.Enable();
         _timer = 0;
+
+        _arrowTr.gameObject.SetActive(true);
+        ChangeArrowSize(0f);
     }
     private void OnDisable()
     {
-        
+        _arrowTr.gameObject.SetActive(false);
     }
     private void OnPressStart(InputAction.CallbackContext ctx)
     {
@@ -74,6 +81,8 @@ public class Bow : MonoBehaviour
         Vector2 mouseWorldPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
         Vector2 pullVector = _pressPos - mouseWorldPos;
         pullVector = Vector2.ClampMagnitude(pullVector, _maxPullDistance);
+
+        ChangeArrowSize(pullVector.magnitude / _maxPullDistance);
         if (pullVector.sqrMagnitude < 0.0001f) return pullVector;
 
         Vector2 shootDir = pullVector.normalized;
@@ -81,7 +90,7 @@ public class Bow : MonoBehaviour
         float clampedAngle = Mathf.Clamp(angleFromUp, -_maxAngleFromUp, _maxAngleFromUp);
 
         Vector2 clampedShootDir = Quaternion.Euler(0f, 0f, clampedAngle) * Vector2.up;
-        return clampedShootDir * pullVector.magnitude; ;
+        return clampedShootDir * pullVector.magnitude;
     }
     private void Shoot(Vector2 pullVector)
     {
@@ -91,5 +100,10 @@ public class Bow : MonoBehaviour
         GameObject arrow = Instantiate(_arrowPrefab, _firePoint.position, _tr.rotation);
         Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
         rb.linearVelocity = direction * (powerRatio * _maxPower);
+    }
+
+    private void ChangeArrowSize(float percentage)
+    {
+        _arrowTr.localScale = Vector3.Lerp(_minArrowSize,_maxArrowSize,percentage);
     }
 }
