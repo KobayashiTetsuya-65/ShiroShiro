@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,22 @@ public class ScoreManager : MonoBehaviour
         get => _currentScore; 
         private set
         {
+            int start = _currentScore;
+            int goal = value;
             _currentScore = value;
+
+            if (_scoreTween != null)
+                _scoreTween.Kill();
+
+            _scoreTween = DOTween.To(() => start,
+                x =>
+                {
+                    start = x;
+                    _scoreText.text = $"{start:D7}";
+                },
+                goal,
+                _scoreDuration)
+                .SetLink(gameObject);
         }
     }
 
@@ -27,14 +43,17 @@ public class ScoreManager : MonoBehaviour
     [Header("-----参照-----")]
     [SerializeField] private ResultManager _resultManager;
     [SerializeField] private Image _timerGauge;
+    [SerializeField] private TextMeshProUGUI _scoreText;
 
     [Header("-----パラメータ調整-----")]
     [SerializeField] private float _maxTime = 100f;
     [SerializeField] private float _timeSpeed = 1f;
+    [SerializeField] private float _scoreDuration = 0.1f;
 
     private bool _isStop = false;
     private int _currentScore;
     private float _currentTime;
+    private Tween _scoreTween;
     private void Awake()
     {
         Instance = this;
