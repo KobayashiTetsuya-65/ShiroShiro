@@ -13,7 +13,9 @@ public class EnemySpawner : MonoBehaviour
     private float _spawnTimer;
 
     private void Update()
-    {
+    { 
+        if(GamePauseManager.IsPaused) return;
+
         _timer += Time.deltaTime;
 
         SpawnWave wave = GetCurrentWave();
