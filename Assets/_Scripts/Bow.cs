@@ -51,6 +51,8 @@ public class Bow : MonoBehaviour
     private void OnPressStart(InputAction.CallbackContext ctx)
     {
         if(GamePauseManager.IsPaused) return;
+        if (ScoreManager.Instance.IsStop) return;
+
         _pressPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
 
         _isDragging = true;
@@ -60,6 +62,7 @@ public class Bow : MonoBehaviour
     private void OnPressEnd(InputAction.CallbackContext ctx)
     {
         if (GamePauseManager.IsPaused) return;
+        if (ScoreManager.Instance.IsStop) return;
         if (!_isDragging) return;
 
         _isDragging = false;
@@ -72,6 +75,8 @@ public class Bow : MonoBehaviour
     void Update()
     {
         if (GamePauseManager.IsPaused) return;
+        if (ScoreManager.Instance.IsStop) return;
+
         _timer += Time.deltaTime;
         if (_timer <= _grabTime) return;
 

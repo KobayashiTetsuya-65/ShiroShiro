@@ -44,6 +44,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private ResultManager _resultManager;
     [SerializeField] private Image _timerGauge;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _finishText;
 
     [Header("-----ƒpƒ‰ƒ[ƒ^’²®-----")]
     [SerializeField] private float _maxTime = 100f;
@@ -59,6 +60,7 @@ public class ScoreManager : MonoBehaviour
         Instance = this;
         _currentScore = 0;
         _currentTime = _maxTime;
+        _finishText.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -71,7 +73,7 @@ public class ScoreManager : MonoBehaviour
         {
             _isStop = true;
 
-            _resultManager.DisplayResult();
+            FinishAnimatoin(true);
         }
     }
     public void AddScore(int delta)
@@ -82,5 +84,23 @@ public class ScoreManager : MonoBehaviour
     public void ChangeTimerGauge()
     {
         _timerGauge.DOFillAmount(_currentTime / _maxTime, 0.05f);
+    }
+
+    private void FinishAnimatoin(bool isTime)
+    {
+        _finishText.gameObject.SetActive(true);
+        _finishText.color = new Color(
+            _finishText.color.r, _finishText.color.g, _finishText.color.b, 0f);
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_finishText.DOFade(1f, 0.1f));
+        seq.Join(_finishText.rectTransform.DOScale(2f, 0.4f));
+        seq.Append(_finishText.rectTransform.DOScale(1f, 0.2f));
+        seq.AppendInterval(2f);
+        seq.AppendCallback(() =>
+        {
+            _finishText.gameObject.SetActive(false);
+            _resultManager.DisplayResult(isTime);
+        });
     }
 }

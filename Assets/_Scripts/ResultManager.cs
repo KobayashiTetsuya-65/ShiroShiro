@@ -8,6 +8,8 @@ public class ResultManager : MonoBehaviour
     [Header("-----参照-----")]
     [SerializeField] private Image _resultPanel;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _timeUpText;
+    [SerializeField] private TextMeshProUGUI _gameoverText;
 
     [Header("-----パラメータ調整-----")]
     [SerializeField] private float _duration = 1f;
@@ -15,18 +17,36 @@ public class ResultManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _timeUpText.gameObject.SetActive(false);
+        _gameoverText.gameObject.SetActive(false);
         _resultPanel.gameObject.SetActive(false);
     }
 
-    public void DisplayResult()
+    public void DisplayResult(bool isTime)
     {
         _resultPanel.gameObject.SetActive(true);
 
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.2f);
-        seq.AppendCallback(() =>
-        {
-            int score = 0;
+
+        TextMeshProUGUI resultText = isTime ? _timeUpText : _gameoverText;
+        string text = resultText.text;
+        resultText.text = "";
+        resultText.gameObject.SetActive(true);
+
+        int length = 0;
+        seq.Append(
+            DOTween.To(() => length,
+                x =>
+                {
+                    length = x;
+                    resultText.text = text.Substring(0, length);
+                },
+                text.Length,
+                1.2f));
+
+        int score = 0;
+        seq.Append(
             DOTween.To(() => score,
                 x =>
                 {
@@ -34,7 +54,6 @@ public class ResultManager : MonoBehaviour
                     _scoreText.text = $"{score:D7}";
                 },
                 ScoreManager.Instance.CurrentScore,
-                _duration);
-        });
+                _duration));
     }
 }
