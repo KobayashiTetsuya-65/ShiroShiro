@@ -25,6 +25,7 @@ public class Bow : MonoBehaviour
     private float _timer;
     private bool _isDragging = false;
     private Vector2 _pressPos;
+    private ScoreManager _scoreManager;
     private void Awake()
     {
         _tr = transform;
@@ -34,6 +35,7 @@ public class Bow : MonoBehaviour
     private void Start()
     {
         enabled = false;
+        _scoreManager = ScoreManager.Instance;
     }
     private void OnEnable()
     {
@@ -69,7 +71,15 @@ public class Bow : MonoBehaviour
         enabled = false;
         if (_timer <= _grabTime) return;
         Vector2 pull = GetPullVector();
-        Shoot(pull);
+
+        if (_scoreManager.IsFever)
+        {
+
+        }
+        else
+        {
+            Shoot(pull);
+        }
     }
 
     void Update()

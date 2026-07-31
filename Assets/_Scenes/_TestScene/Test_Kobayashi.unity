@@ -1225,6 +1225,8 @@ MonoBehaviour:
   _maxTime: 30
   _timeSpeed: 1
   _scoreDuration: 0.1
+  _feverTime: 10
+  _feverScoreMag: 1.5
 --- !u!4 &778333405
 Transform:
   m_ObjectHideFlags: 0
@@ -2502,7 +2504,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2045086635}
+  m_Father: {fileID: 1949897757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -3004,6 +3006,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1375279753}
   - {fileID: 1331836129}
   - {fileID: 1857669610}
   - {fileID: 496011159}
@@ -3108,8 +3111,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1375279753}
+  m_Children: []
   m_Father: {fileID: 1187932336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3291,7 +3293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3380707101216888855, guid: cb741e7578f96f14eaa7447fc2b6332f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.48
+      value: -1.88
       objectReference: {fileID: 0}
     - target: {fileID: 3380707101216888855, guid: cb741e7578f96f14eaa7447fc2b6332f, type: 3}
       propertyPath: m_LocalPosition.z

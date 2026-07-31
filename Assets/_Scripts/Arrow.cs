@@ -51,7 +51,7 @@ public class Arrow : MonoBehaviour
         if(other.TryGetComponent<IHitable>(out var obj))
         {
             obj.HitArrow();
-            InkManager.Instance.DisplayInk(transform.position);
+            InkManager.Instance.DisplayInk(other.transform.position);
         }
         else
         {
