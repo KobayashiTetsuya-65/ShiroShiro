@@ -25,6 +25,7 @@ public class Bow : MonoBehaviour
     private float _timer;
     private bool _isDragging = false;
     private Vector2 _pressPos;
+    private ScoreManager _scoreManager;
     private void Awake()
     {
         _tr = transform;
@@ -34,6 +35,7 @@ public class Bow : MonoBehaviour
     private void Start()
     {
         enabled = false;
+        _scoreManager = ScoreManager.Instance;
     }
     private void OnEnable()
     {
@@ -51,6 +53,8 @@ public class Bow : MonoBehaviour
     private void OnPressStart(InputAction.CallbackContext ctx)
     {
         if(GamePauseManager.IsPaused) return;
+        if (ScoreManager.Instance.IsStop) return;
+
         _pressPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
 
         _isDragging = true;
@@ -60,18 +64,29 @@ public class Bow : MonoBehaviour
     private void OnPressEnd(InputAction.CallbackContext ctx)
     {
         if (GamePauseManager.IsPaused) return;
+        if (ScoreManager.Instance.IsStop) return;
         if (!_isDragging) return;
 
         _isDragging = false;
         enabled = false;
         if (_timer <= _grabTime) return;
         Vector2 pull = GetPullVector();
-        Shoot(pull);
+
+        if (_scoreManager.IsFever)
+        {
+
+        }
+        else
+        {
+            Shoot(pull);
+        }
     }
 
     void Update()
     {
         if (GamePauseManager.IsPaused) return;
+        if (ScoreManager.Instance.IsStop) return;
+
         _timer += Time.deltaTime;
         if (_timer <= _grabTime) return;
 
