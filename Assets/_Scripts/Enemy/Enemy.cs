@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour, IHitable
 
     private void Return()
     {
+        ScoreManager.Instance.AddScore(Score);
         OnReturn?.Invoke(this);
     }
 }
