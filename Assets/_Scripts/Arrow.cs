@@ -13,7 +13,12 @@ public class Arrow : MonoBehaviour
 
     private bool _beforePause = false;
     private Vector2 _savedVelocity;
+    private ScoreManager _scoreManager;
 
+    private void Start()
+    {
+        _scoreManager = ScoreManager.Instance;
+    }
     private void Update()
     {
         if(GamePauseManager.IsPaused != _beforePause)
