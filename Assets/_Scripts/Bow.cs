@@ -20,6 +20,8 @@ public class Bow : MonoBehaviour
     [SerializeField] private float _grabTime = 1f;
     [SerializeField] private float _angleOffset = 90f;
     [SerializeField, Range(0f, 90f)] private float _maxAngleFromUp = 90f;
+    [SerializeField] private int _feverArrowAmount = 6;
+    [SerializeField] private float _feverSpreadAngle = 60f;
 
     private Transform _tr;
     private float _timer;
@@ -74,7 +76,19 @@ public class Bow : MonoBehaviour
 
         if (_scoreManager.IsFever)
         {
+            float startAngle = -_feverSpreadAngle / 2f;
+            float angleStep = _feverArrowAmount > 1 ? 
+                _feverSpreadAngle / (_feverArrowAmount - 1) : 0f;
 
+            for (int i = 0; i < _feverArrowAmount; i++)
+            {
+                float angle = startAngle + angleStep * i;
+
+                Vector2 rotatedPull =
+                    Quaternion.Euler(0f, 0f, angle) * pull;
+
+                Shoot(rotatedPull);
+            }
         }
         else
         {
