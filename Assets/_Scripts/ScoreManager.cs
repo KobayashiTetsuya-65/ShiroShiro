@@ -7,14 +7,11 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
     public bool IsStop => _isStop;
-    public bool IsFever
-    {
-        get => _isFever;
-        private set
-        {
-            _isFever = value;
-        }
-    }
+    public bool IsFever => _isFever;
+    /// <summary>
+    /// 現在のスコア。
+    /// UI表示更新機能付き
+    /// </summary>
     public int CurrentScore
     {
         get => _currentScore; 
@@ -39,33 +36,67 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public float CurrentTime
+    public int CurrentCombo
     {
-        get => _currentTime;
+        get => _currentCombo;
         private set
         {
-            _currentTime = value;
+            _currentCombo = value;
+
+            if (value == 0)
+            {
+                _isCombo = false;
+            }
+            else
+            {
+                _isFade = false;
+                _isCombo = true;
+                _currentComboTime = _comboDuration;
+                _comboText.text = value.ToString();
+                _comboText.DOKill();
+                _comboImg.DOKill();
+                _comboTr.DOKill();
+                _comboText.DOFade(1f,0.05f);
+                _comboImg.DOFade(1f, 0.05f);
+                _comboTr.DOScale(_comboMaxScale, 0.1f)
+                    .OnComplete(() =>
+                    {
+                        _comboTr.DOScale(1f, 0.1f);
+                    });
+            }  
         }
     }
+
+    public float CurrentTime=> _currentTime;
 
     [Header("-----参照-----")]
     [SerializeField] private ResultManager _resultManager;
     [SerializeField] private Image _timerGauge;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _finishText;
+    [SerializeField] private TextMeshProUGUI _comboText;
+    [SerializeField] private Image _comboImg;
+    [SerializeField] private Transform _comboTr;
 
     [Header("-----パラメータ調整-----")]
     [SerializeField] private float _maxTime = 100f;
     [SerializeField] private float _timeSpeed = 1f;
     [SerializeField] private float _scoreDuration = 0.1f;
+    [Header("フィーバー")]
     [SerializeField] private float _feverTime = 10f;
     [SerializeField] private float _feverScoreMag = 1.5f;
+    [Header("コンボ")]
+    [SerializeField] private float _comboDuration = 1f;
+    [SerializeField] private float _comboScoreMag = 0.1f;
+    [SerializeField] private float _comboMaxScale = 1.4f;
 
     private bool _isFever = false;
     private bool _isStop = false;
-    private int _currentScore;
-    private float _currentTime;
-    private float _currentFeverTime;
+    private bool _isCombo = false;
+    private bool _isFade = false;
+    private int _currentScore,_currentCombo = 0;
+    private float _currentTime, _currentFeverTime;
+    private float _currentComboTime = 0;
     private Tween _scoreTween;
     private void Awake()
     {
@@ -73,14 +104,20 @@ public class ScoreManager : MonoBehaviour
         _currentScore = 0;
         _currentTime = _maxTime;
         _finishText.gameObject.SetActive(false);
+        Color text = _comboText.color;
+        _comboText.color = new Color(text.r, text.g, text.b, 0f);
+        Color img = _comboImg.color;
+        _comboImg.color = new Color(img.r, img.g, img.b, 0f);
     }
     private void Update()
     {
         if (_isStop || GamePauseManager.IsPaused) return;
 
+        float time = _timeSpeed * Time.deltaTime;
+
         if (_isFever)
         {
-            _currentFeverTime -= _timeSpeed * Time.deltaTime;
+            _currentFeverTime -= time;
 
             if(_currentFeverTime <= 0)
             {
@@ -88,7 +125,23 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
-        _currentTime -= _timeSpeed * Time.deltaTime;
+        if (_isCombo)
+        {
+            _currentComboTime -= time;
+
+            if (_currentComboTime <= _comboDuration / 2 && !_isFade)
+            {
+                _comboImg.DOFade(0f, _currentComboTime);
+                _comboText.DOFade(0f, _currentComboTime);
+                _isFade = true;
+            }
+            if (_currentComboTime <= 0)
+            {
+                CurrentCombo = 0;
+            }
+        }
+
+        _currentTime -= time;
         ChangeTimerGauge();
 
         if(_currentTime <= 0)
@@ -102,9 +155,13 @@ public class ScoreManager : MonoBehaviour
     {
         if (_isFever)
         {
-            delta = (int)((float)delta *_feverScoreMag);
+            delta = (int)(delta *_feverScoreMag);
         }
-        CurrentScore = Mathf.Max(0,CurrentScore + delta);
+        if (_isCombo)
+        {
+            delta += (int)(delta * _comboScoreMag);
+        }
+        CurrentScore = Mathf.Clamp(CurrentScore + delta,0,9999999);
     }
 
     public void ChangeTimerGauge()
@@ -114,7 +171,7 @@ public class ScoreManager : MonoBehaviour
 
     public void FeverTime(bool isStart = true)
     {
-        IsFever = isStart;
+        _isFever = isStart;
         _currentFeverTime = _feverTime;
     }
     private void FinishAnimatoin(bool isTime)
@@ -133,5 +190,10 @@ public class ScoreManager : MonoBehaviour
             _finishText.gameObject.SetActive(false);
             _resultManager.DisplayResult(isTime);
         });
+    }
+
+    public void AddCombo()
+    {
+        CurrentCombo++;
     }
 }

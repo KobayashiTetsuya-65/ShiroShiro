@@ -52,6 +52,7 @@ public class Arrow : MonoBehaviour
         {
             obj.HitArrow();
             InkManager.Instance.DisplayInk(other.transform.position);
+            _scoreManager.AddCombo();
         }
         else
         {
