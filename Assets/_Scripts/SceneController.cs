@@ -56,5 +56,6 @@ public enum SceneName
 {
     Title,
     InGame,
-    Result
+    Result,
+    Test_Futo
 }

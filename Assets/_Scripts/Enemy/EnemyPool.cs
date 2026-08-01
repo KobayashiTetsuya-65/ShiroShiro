@@ -18,14 +18,15 @@ public class EnemyPool : MonoBehaviour
         if (queue.Count > 0)
         {
             Enemy enemy = queue.Dequeue();
+            enemy.Initialize(enemyID);
             enemy.gameObject.SetActive(true);
             return enemy;
         }
 
         Enemy prefab = _enemyDataBase.GetEnemyData(enemyID).EnemyObject;
-
         Enemy newEnemy = Instantiate(prefab).GetComponent<Enemy>();
 
+        newEnemy.Initialize(enemyID);
         newEnemy.OnReturn += Return;
 
         return newEnemy;
