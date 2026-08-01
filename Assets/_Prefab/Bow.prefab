@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 5848340583281147628, guid: 863f901a8232bf84692eb65ed61235d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -178,7 +178,7 @@ MonoBehaviour:
   _maxPullDistance: 1
   _maxPower: 18
   _minArrowSize: {x: 0.5, y: 1, z: 1}
-  _maxArrowSize: {x: 2, y: 1, z: 1}
+  _maxArrowSize: {x: 3, y: 1, z: 1}
   _grabTime: 0.1
   _angleOffset: 90
   _maxAngleFromUp: 90
@@ -271,5 +271,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
