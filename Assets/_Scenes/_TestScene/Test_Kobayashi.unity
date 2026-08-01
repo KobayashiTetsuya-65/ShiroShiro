@@ -298,6 +298,9 @@ MonoBehaviour:
   _sprites:
   - {fileID: -855298285791758126, guid: 959db1c711c9c634bafb449e891da88e, type: 3}
   - {fileID: 6937817954938267909, guid: 20f172513ed9218439e804f9e6eef464, type: 3}
+  _minScaleMag: 0.8
+  _maxScaleMag: 1.5
+  _scatter: 1
 --- !u!4 &219115066
 Transform:
   m_ObjectHideFlags: 0
