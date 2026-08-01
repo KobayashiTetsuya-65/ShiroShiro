@@ -16,6 +16,7 @@ public class InkManager : MonoBehaviour
     }
     public void DisplayInk(Vector3 pos)
     {
+        pos += new Vector3(0f, 0f, 1f);
         GameObject ink = Instantiate(_prefab, pos,
             Quaternion.Euler(0, 0, Random.Range(0f, 360f)),_parent);
         SpriteRenderer sr = ink.GetComponent<SpriteRenderer>();

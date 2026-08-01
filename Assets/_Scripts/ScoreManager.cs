@@ -65,6 +65,7 @@ public class ScoreManager : MonoBehaviour
     private bool _isStop = false;
     private int _currentScore;
     private float _currentTime;
+    private float _currentFeverTime;
     private Tween _scoreTween;
     private void Awake()
     {
@@ -76,6 +77,16 @@ public class ScoreManager : MonoBehaviour
     private void Update()
     {
         if (_isStop || GamePauseManager.IsPaused) return;
+
+        if (_isFever)
+        {
+            _currentFeverTime -= _timeSpeed * Time.deltaTime;
+
+            if(_currentFeverTime <= 0)
+            {
+                FeverTime(false);
+            }
+        }
 
         _currentTime -= _timeSpeed * Time.deltaTime;
         ChangeTimerGauge();
@@ -101,9 +112,10 @@ public class ScoreManager : MonoBehaviour
         _timerGauge.DOFillAmount(_currentTime / _maxTime, 0.05f);
     }
 
-    public void FeverTime(bool isStart)
+    public void FeverTime(bool isStart = true)
     {
         IsFever = isStart;
+        _currentFeverTime = _feverTime;
     }
     private void FinishAnimatoin(bool isTime)
     {

@@ -129,12 +129,12 @@ TextureImporter:
       name: IMG_100x100_barisuta ya_0
       rect:
         serializedVersion: 2
-        x: 44
-        y: 4
+        x: 41
+        y: 0
         width: 15
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: eaf3771b96ff36b4ebd895c7cefcd66d
     internalID: 0
     vertices: []
     indices: 
