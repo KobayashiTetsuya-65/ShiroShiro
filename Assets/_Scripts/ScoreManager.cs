@@ -49,8 +49,20 @@ public class ScoreManager : MonoBehaviour
             }
             else
             {
+                _isFade = false;
                 _isCombo = true;
                 _currentComboTime = _comboDuration;
+                _comboText.text = value.ToString();
+                _comboText.DOKill();
+                _comboImg.DOKill();
+                _comboTr.DOKill();
+                _comboText.DOFade(1f,0.05f);
+                _comboImg.DOFade(1f, 0.05f);
+                _comboTr.DOScale(_comboMaxScale, 0.1f)
+                    .OnComplete(() =>
+                    {
+                        _comboTr.DOScale(1f, 0.1f);
+                    });
             }  
         }
     }
@@ -62,6 +74,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Image _timerGauge;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _finishText;
+    [SerializeField] private TextMeshProUGUI _comboText;
+    [SerializeField] private Image _comboImg;
+    [SerializeField] private Transform _comboTr;
 
     [Header("-----パラメータ調整-----")]
     [SerializeField] private float _maxTime = 100f;
@@ -73,10 +88,12 @@ public class ScoreManager : MonoBehaviour
     [Header("コンボ")]
     [SerializeField] private float _comboDuration = 1f;
     [SerializeField] private float _comboScoreMag = 0.1f;
+    [SerializeField] private float _comboMaxScale = 1.4f;
 
     private bool _isFever = false;
     private bool _isStop = false;
     private bool _isCombo = false;
+    private bool _isFade = false;
     private int _currentScore,_currentCombo = 0;
     private float _currentTime, _currentFeverTime;
     private float _currentComboTime = 0;
@@ -87,6 +104,10 @@ public class ScoreManager : MonoBehaviour
         _currentScore = 0;
         _currentTime = _maxTime;
         _finishText.gameObject.SetActive(false);
+        Color text = _comboText.color;
+        _comboText.color = new Color(text.r, text.g, text.b, 0f);
+        Color img = _comboImg.color;
+        _comboImg.color = new Color(img.r, img.g, img.b, 0f);
     }
     private void Update()
     {
@@ -108,7 +129,13 @@ public class ScoreManager : MonoBehaviour
         {
             _currentComboTime -= time;
 
-            if(_currentComboTime <= 0)
+            if (_currentComboTime <= _comboDuration / 2 && !_isFade)
+            {
+                _comboImg.DOFade(0f, _currentComboTime);
+                _comboText.DOFade(0f, _currentComboTime);
+                _isFade = true;
+            }
+            if (_currentComboTime <= 0)
             {
                 CurrentCombo = 0;
             }
