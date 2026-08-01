@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d5a449aa862f9de43ba0d3fa58ab816b
+guid: 78406f6d9c4d151469d03a408445fbe8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8079908750231388095
-    second: IMG_860x450_Uesr_0
+      213: -4615163557086929257
+    second: IMG_25632_Button_GAGE_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_860x450_Uesr_0
+      name: IMG_25632_Button_GAGE_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 800
-        height: 450
+        width: 256
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 112, y: 105, z: 119, w: 105}
+      border: {x: 7, y: 6, z: 6, w: 6}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fbfbc1bf23a912070800000000000000
-      internalID: 8079908750231388095
+      spriteID: 79e518f6235a3ffb0800000000000000
+      internalID: -4615163557086929257
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ceb386bd6ded85a499e279b443d73a91
+    spriteID: 7a8a0d3176e8f1a4a8cff7995ad426dc
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_860x450_Uesr_0: 8079908750231388095
+      IMG_25632_Button_GAGE_0: -4615163557086929257
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
