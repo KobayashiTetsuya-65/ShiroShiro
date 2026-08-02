@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 public enum SEType
 {
-    Bomb,Arrow,Bow,Hit,ButtonHover,Button,Fever,Finish
+    Bomb,Arrow,Bow,Hit,ButtonHover,Button,Fever,Finish,HighScore,Count,Start
 }
 public enum BGMType
 {

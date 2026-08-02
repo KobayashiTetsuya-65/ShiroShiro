@@ -64,6 +64,14 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 83432b7c4c28c1e47a324681853fed7e, type: 3}
   - Type: 7
     Clip: {fileID: 8300000, guid: 9081e5dfadc5d07408e8603ebd8562c8, type: 3}
+  - Type: 0
+    Clip: {fileID: 8300000, guid: ce95d1abeb31be047a08fb2d14e01e54, type: 3}
+  - Type: 8
+    Clip: {fileID: 8300000, guid: d20d90518b99cf747873b9b519367134, type: 3}
+  - Type: 9
+    Clip: {fileID: 8300000, guid: 2268dbbbc4d1ff34b8753d70b5e179f9, type: 3}
+  - Type: 10
+    Clip: {fileID: 8300000, guid: e2973c2ddc8df8549993fe755b1a404b, type: 3}
   _bgmDatas:
   - Type: 2
     Clip: {fileID: 8300000, guid: 9c7dd0970a2942f4aa215e04496ebf11, type: 3}

@@ -54,10 +54,10 @@ public class CountdownController : MonoBehaviour
 
         foreach (var text in _countdownTexts)
         {
-            AppendStep(sequence, text);
+            AppendStep(sequence, text, SEType.Count);
         }
 
-        AppendStep(sequence, _startText);
+        AppendStep(sequence, _startText,SEType.Start);
 
         sequence.OnComplete(() =>
         {
@@ -68,13 +68,14 @@ public class CountdownController : MonoBehaviour
         });
     }
 
-    private void AppendStep(Sequence sequence, string text)
+    private void AppendStep(Sequence sequence, string text, SEType type)
     {
         sequence.AppendCallback(() =>
         {
             _countdownText.text = text;
             _countdownText.transform.localScale = _startScale;
             _canvasGroup.alpha = 1f;
+            AudioManager.Instance.PlaySE(type);
         });
 
         sequence.Append(
