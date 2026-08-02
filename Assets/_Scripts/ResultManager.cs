@@ -10,6 +10,7 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _timeUpText;
     [SerializeField] private TextMeshProUGUI _gameoverText;
+    [SerializeField] private RectTransform _high;
 
     [Header("-----ƒpƒ‰ƒ[ƒ^’²®-----")]
     [SerializeField] private float _duration = 1f;
@@ -31,6 +32,7 @@ public class ResultManager : MonoBehaviour
         seq.AppendInterval(0.2f);
 
         TextMeshProUGUI resultText = isTime ? _timeUpText : _gameoverText;
+        bool update = false;
         string text = resultText.text;
         resultText.text = "";
         resultText.gameObject.SetActive(true);
@@ -41,7 +43,7 @@ public class ResultManager : MonoBehaviour
                 false => ScoreMode.Normal,
                 true => ScoreMode.Endless,
             };
-            HighScore.TrySubmit(scoreMode, ScoreManager.Instance.CurrentScore);
+            update = HighScore.TrySubmit(scoreMode, ScoreManager.Instance.CurrentScore);
             Debug.Log(ScoreManager.Instance.CurrentScore);
         });
 
@@ -66,5 +68,18 @@ public class ResultManager : MonoBehaviour
                 },
                 ScoreManager.Instance.CurrentScore,
                 _duration));
+        seq.OnComplete(() =>
+        {
+            if (update)
+            {
+                AudioManager.Instance.PlaySE(SEType.HighScore);
+                _high.gameObject.SetActive(true);
+                _high.DOScale(2f, 0.4f)
+                .OnComplete(() =>
+                {
+                    _high.DOScale(1f, 0.3f);
+                });
+            }
+        });
     }
 }
