@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
     public bool IsStop => _isStop;
     public bool IsFever => _isFever;
+    public bool IsInfinite => _isInfinite;
     /// <summary>
     /// 現在のスコア。
     /// UI表示更新機能付き
@@ -174,12 +175,13 @@ public class ScoreManager : MonoBehaviour
 
     public void FeverTime(bool isStart = true)
     {
-        AudioManager.Instance.PlaySE(SEType.Fever);
+        if(isStart) AudioManager.Instance.PlaySE(SEType.Fever);
         _isFever = isStart;
         _currentFeverTime = _feverTime;
     }
     private void FinishAnimatoin(bool isTime)
     {
+        AudioManager.Instance.PlaySE(SEType.Finish);
         _finishText.gameObject.SetActive(true);
         _finishText.color = new Color(
             _finishText.color.r, _finishText.color.g, _finishText.color.b, 0f);
