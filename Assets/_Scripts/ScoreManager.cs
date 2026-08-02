@@ -54,10 +54,10 @@ public class ScoreManager : MonoBehaviour
                 _currentComboTime = _comboDuration;
                 _comboText.text = value.ToString();
                 _comboText.DOKill();
-                _comboImg.DOKill();
+                _comboT.DOKill();
                 _comboTr.DOKill();
                 _comboText.DOFade(1f,0.05f);
-                _comboImg.DOFade(1f, 0.05f);
+                _comboT.DOFade(1f, 0.05f);
                 _comboTr.DOScale(_comboMaxScale, 0.1f)
                     .OnComplete(() =>
                     {
@@ -75,7 +75,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _finishText;
     [SerializeField] private TextMeshProUGUI _comboText;
-    [SerializeField] private Image _comboImg;
+    [SerializeField] private TextMeshProUGUI _comboT;
     [SerializeField] private Transform _comboTr;
 
     [Header("-----ÉpÉâÉÅÅ[É^í≤êÆ-----")]
@@ -107,8 +107,8 @@ public class ScoreManager : MonoBehaviour
         _finishText.gameObject.SetActive(false);
         Color text = _comboText.color;
         _comboText.color = new Color(text.r, text.g, text.b, 0f);
-        Color img = _comboImg.color;
-        _comboImg.color = new Color(img.r, img.g, img.b, 0f);
+        Color img = _comboT.color;
+        _comboT.color = new Color(img.r, img.g, img.b, 0f);
     }
     private void Update()
     {
@@ -132,7 +132,7 @@ public class ScoreManager : MonoBehaviour
 
             if (_currentComboTime <= _comboDuration / 2 && !_isFade)
             {
-                _comboImg.DOFade(0f, _currentComboTime);
+                _comboT.DOFade(0f, _currentComboTime);
                 _comboText.DOFade(0f, _currentComboTime);
                 _isFade = true;
             }
