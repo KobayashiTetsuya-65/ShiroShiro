@@ -23,6 +23,19 @@ public class Bow : MonoBehaviour
     [SerializeField] private int _feverArrowAmount = 6;
     [SerializeField] private float _feverSpreadAngle = 60f;
 
+    private Camera CurrentCamera
+    {
+        get
+        {
+            if (_camera == null)
+            {
+                _camera = Camera.main;
+            }
+
+            return _camera;
+        }
+    }
+
     private Transform _tr;
     private float _timer;
     private bool _isDragging = false;
@@ -139,5 +152,10 @@ public class Bow : MonoBehaviour
     private void ChangeArrowSize(float percentage)
     {
         _arrowTr.localScale = Vector3.Lerp(_minArrowSize,_maxArrowSize,percentage);
+    }
+    private void OnDestroy()
+    {
+        _pressAction.started -= OnPressStart;
+        _pressAction.canceled -= OnPressEnd;
     }
 }
