@@ -15,3 +15,9 @@ MonoBehaviour:
   _enemys:
   - EnemyID: 1
     EnemyObject: {fileID: 2321335951399130356, guid: e5c21eb2574127c4a9cbb850e578fc65, type: 3}
+  - EnemyID: 2
+    EnemyObject: {fileID: 2321335951399130356, guid: 1d89c780bbaefff4cbe782580a1c79d4, type: 3}
+  - EnemyID: 3
+    EnemyObject: {fileID: 2321335951399130356, guid: 7602161e07b784f4d9ec16fed7a61cb4, type: 3}
+  - EnemyID: 4
+    EnemyObject: {fileID: 2321335951399130356, guid: 79f54f54d7d053b4b9447b9c3abef52a, type: 3}

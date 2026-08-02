@@ -82,6 +82,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float _maxTime = 100f;
     [SerializeField] private float _timeSpeed = 1f;
     [SerializeField] private float _scoreDuration = 0.1f;
+    [SerializeField] private bool _isInfinite = false;
     [Header("フィーバー")]
     [SerializeField] private float _feverTime = 10f;
     [SerializeField] private float _feverScoreMag = 1.5f;
@@ -140,6 +141,8 @@ public class ScoreManager : MonoBehaviour
                 CurrentCombo = 0;
             }
         }
+
+        if (_isInfinite) return;
 
         _currentTime -= time;
         ChangeTimerGauge();

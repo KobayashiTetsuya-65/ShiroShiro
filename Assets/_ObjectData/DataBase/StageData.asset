@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageDataSO
   Waves:
   - StartTime: 0
-    EndTime: 30
+    EndTime: 1e+10
     SpawnPerSecond: 1
     Enemies:
     - EnemyID: 1
-      Weight: 100
+      Weight: 33
+    - EnemyID: 2
+      Weight: 33
+    - EnemyID: 3
+      Weight: 33

@@ -4,6 +4,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private StageDataSO _stageData;
     [SerializeField] private EnemyPool _enemyPool;
+    [SerializeField] private SpawnWave _feverWave;
 
     [Header("ÉXÉ|Å[ÉìîÕàÕ")]
     [SerializeField] private Camera _camera;
@@ -11,6 +12,12 @@ public class EnemySpawner : MonoBehaviour
 
     private float _timer;
     private float _spawnTimer;
+    private ScoreManager _scoreManager;
+
+    private void Start()
+    {
+        _scoreManager = ScoreManager.Instance;
+    }
 
     private void Update()
     { 
@@ -18,11 +25,32 @@ public class EnemySpawner : MonoBehaviour
 
         _timer += Time.deltaTime;
 
+        if (_scoreManager.IsFever)
+        {
+            SpawnFever();
+            return;
+        }
+
+        SpawnNormal();
+    }
+
+    private void SpawnNormal()
+    {
         SpawnWave wave = GetCurrentWave();
 
         if (wave == null)
             return;
 
+        SpawnFromWave(wave);
+    }
+
+    private void SpawnFever()
+    {
+        SpawnFromWave(_feverWave);
+    }
+
+    private void SpawnFromWave(SpawnWave wave)
+    {
         _spawnTimer += Time.deltaTime;
 
         float interval = 1f / wave.SpawnPerSecond;
