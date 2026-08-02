@@ -32,6 +32,7 @@ public class UIButtonAnimation : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        AudioManager.Instance.PlaySE(SEType.ButtonHover);
         target.DOKill();
         target.DOScale(defaultScale * hoverScale, duration)
               .SetEase(ease)
@@ -49,6 +50,7 @@ public class UIButtonAnimation : MonoBehaviour,
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        AudioManager.Instance.PlaySE(SEType.Button);
         target.DOKill();
         target.DOScale(defaultScale * pressScale, duration * 0.5f)
               .SetEase(Ease.OutQuad)

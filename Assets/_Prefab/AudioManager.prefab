@@ -49,8 +49,22 @@ MonoBehaviour:
   _mixer: {fileID: 24100000, guid: dde0b1d32007a874aa00e09135015d1a, type: 2}
   _bgmSource: {fileID: 8127210872484879868}
   _seSource: {fileID: 319358337957191282}
-  _seDatas: []
-  _bgmDatas: []
+  _seDatas:
+  - Type: 2
+    Clip: {fileID: 8300000, guid: 9bd0c543e5536b94988a39cd265430fe, type: 3}
+  - Type: 1
+    Clip: {fileID: 8300000, guid: 8f39a9f00ad198c42be8ea92b9eff061, type: 3}
+  - Type: 3
+    Clip: {fileID: 8300000, guid: 8d1d46b8d4f41874297b9638caf091dc, type: 3}
+  - Type: 4
+    Clip: {fileID: 8300000, guid: eec141405395ab149b420aef20eb8fde, type: 3}
+  - Type: 5
+    Clip: {fileID: 8300000, guid: 2f6feac07da4f3c49947a41ca104d81e, type: 3}
+  - Type: 6
+    Clip: {fileID: 8300000, guid: 83432b7c4c28c1e47a324681853fed7e, type: 3}
+  _bgmDatas:
+  - Type: 2
+    Clip: {fileID: 8300000, guid: 9c7dd0970a2942f4aa215e04496ebf11, type: 3}
   _bgmFadeDuration: 0.5
 --- !u!82 &8127210872484879868
 AudioSource:
@@ -162,7 +176,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.506
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -18,8 +18,10 @@ MonoBehaviour:
     SpawnPerSecond: 1
     Enemies:
     - EnemyID: 1
-      Weight: 33
+      Weight: 25
     - EnemyID: 2
-      Weight: 33
+      Weight: 25
     - EnemyID: 3
-      Weight: 33
+      Weight: 25
+    - EnemyID: 4
+      Weight: 25

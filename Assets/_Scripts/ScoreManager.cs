@@ -174,6 +174,7 @@ public class ScoreManager : MonoBehaviour
 
     public void FeverTime(bool isStart = true)
     {
+        AudioManager.Instance.PlaySE(SEType.Fever);
         _isFever = isStart;
         _currentFeverTime = _feverTime;
     }

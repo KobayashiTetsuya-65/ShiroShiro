@@ -13,5 +13,6 @@ public class SceneChangeButton : MonoBehaviour
     private void ScenChange()
     {
         SceneController.Instance.SceneChange(_sceneName);
+        AudioManager.Instance.StopBGM();
     }
 }
