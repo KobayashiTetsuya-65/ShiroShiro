@@ -14,14 +14,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageDataSO
   Waves:
   - StartTime: 0
-    EndTime: 1e+10
+    EndTime: 20
     SpawnPerSecond: 1
     Enemies:
     - EnemyID: 1
-      Weight: 25
-    - EnemyID: 2
-      Weight: 25
-    - EnemyID: 3
-      Weight: 25
+      Weight: 95
     - EnemyID: 4
-      Weight: 25
+      Weight: 5
+  - StartTime: 20
+    EndTime: 50
+    SpawnPerSecond: 1
+    Enemies:
+    - EnemyID: 1
+      Weight: 65
+    - EnemyID: 2
+      Weight: 30
+    - EnemyID: 4
+      Weight: 5
+  - StartTime: 40
+    EndTime: 70
+    SpawnPerSecond: 1.5
+    Enemies:
+    - EnemyID: 1
+      Weight: 35
+    - EnemyID: 2
+      Weight: 30
+    - EnemyID: 3
+      Weight: 30
+    - EnemyID: 4
+      Weight: 5
+  - StartTime: 70
+    EndTime: 100
+    SpawnPerSecond: 2
+    Enemies:
+    - EnemyID: 1
+      Weight: 10
+    - EnemyID: 2
+      Weight: 40
+    - EnemyID: 3
+      Weight: 45
+    - EnemyID: 4
+      Weight: 5
+  - StartTime: 100
+    EndTime: 200
+    SpawnPerSecond: 3
+    Enemies:
+    - EnemyID: 1
+      Weight: 35
+    - EnemyID: 2
+      Weight: 30
+    - EnemyID: 3
+      Weight: 30
+    - EnemyID: 4
+      Weight: 5
+  - StartTime: 200
+    EndTime: 300
+    SpawnPerSecond: 4
+    Enemies:
+    - EnemyID: 1
+      Weight: 35
+    - EnemyID: 2
+      Weight: 30
+    - EnemyID: 3
+      Weight: 30
+    - EnemyID: 4
+      Weight: 5
+  - StartTime: 300
+    EndTime: 500000000
+    SpawnPerSecond: 4
+    Enemies:
+    - EnemyID: 1
+      Weight: 35
+    - EnemyID: 2
+      Weight: 30
+    - EnemyID: 3
+      Weight: 30

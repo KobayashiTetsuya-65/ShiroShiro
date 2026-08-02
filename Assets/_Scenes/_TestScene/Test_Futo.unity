@@ -1967,14 +1967,10 @@ MonoBehaviour:
   _feverWave:
     StartTime: 0
     EndTime: 0
-    SpawnPerSecond: 3
+    SpawnPerSecond: 5
     Enemies:
     - EnemyID: 1
-      Weight: 0
-    - EnemyID: 2
-      Weight: 0
-    - EnemyID: 3
-      Weight: 0
+      Weight: 100
   _camera: {fileID: 84570926}
   _spawnOffsetY: 1
 --- !u!4 &791039008
@@ -2239,6 +2235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803535551}
   - component: {fileID: 803535552}
+  - component: {fileID: 803535553}
   m_Layer: 5
   m_Name: BGMSttingSlider
   m_TagString: Untagged
@@ -2319,6 +2316,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &803535553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803535550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b2eb9f89daa2c418a41808514219ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSlider
+  _exposedName: BGM
 --- !u!1 &913921482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2720,6 +2730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1059834438}
   - component: {fileID: 1059834439}
+  - component: {fileID: 1059834440}
   m_Layer: 5
   m_Name: SESettingSlider
   m_TagString: Untagged
@@ -2800,6 +2811,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1059834440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059834437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b2eb9f89daa2c418a41808514219ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSlider
+  _exposedName: SE
 --- !u!1 &1096899407
 GameObject:
   m_ObjectHideFlags: 0
