@@ -2968,6 +2968,7 @@ MonoBehaviour:
   _scoreText: {fileID: 1884741023}
   _timeUpText: {fileID: 1314871162}
   _gameoverText: {fileID: 405681361}
+  _high: {fileID: 8418702489438673756}
   _duration: 1
 --- !u!4 &1097367791
 Transform:
@@ -5792,6 +5793,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8418702489438673760}
   m_SourcePrefab: {fileID: 100100000, guid: 9e71ae83e825bec4d8531ab4cd6cfe5a, type: 3}
+--- !u!224 &8418702489438673756 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2304235570918161830, guid: 9e71ae83e825bec4d8531ab4cd6cfe5a, type: 3}
+  m_PrefabInstance: {fileID: 8418702489438673755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8418702489438673757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6085641462694115230, guid: 9e71ae83e825bec4d8531ab4cd6cfe5a, type: 3}
