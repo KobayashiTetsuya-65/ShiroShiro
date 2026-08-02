@@ -37,7 +37,7 @@ public class Castle : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (CurrentHp <= 0) return;
-
+        AudioManager.Instance.PlaySE(SEType.Bomb);
         CurrentHp -= damage;
         CurrentHp = Mathf.Max(CurrentHp, 0);
 
