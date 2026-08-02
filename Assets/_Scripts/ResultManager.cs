@@ -34,6 +34,16 @@ public class ResultManager : MonoBehaviour
         string text = resultText.text;
         resultText.text = "";
         resultText.gameObject.SetActive(true);
+        seq.AppendCallback(() =>
+        {
+            ScoreMode scoreMode = ScoreManager.Instance.IsInfinite switch
+            {
+                false => ScoreMode.Normal,
+                true => ScoreMode.Endless,
+            };
+            HighScore.TrySubmit(scoreMode, ScoreManager.Instance.CurrentScore);
+            Debug.Log(ScoreManager.Instance.CurrentScore);
+        });
 
         int length = 0;
         seq.Append(
