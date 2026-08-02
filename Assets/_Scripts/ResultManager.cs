@@ -24,6 +24,7 @@ public class ResultManager : MonoBehaviour
 
     public void DisplayResult(bool isTime)
     {
+        GamePauseManager.SetPaused(true);
         _resultPanel.gameObject.SetActive(true);
 
         Sequence seq = DOTween.Sequence();

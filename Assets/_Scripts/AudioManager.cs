@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 public enum SEType
 {
-    Bomb,Arrow
+    Bomb,Arrow,Bow,Hit,ButtonHover,Button,Fever
 }
 public enum BGMType
 {
@@ -119,7 +119,7 @@ public class AudioManager : MonoBehaviour
     {
         return scene switch
         {
-            SceneName.Title => BGMType.Title,
+            SceneName.TitleScene => BGMType.Title,
             SceneName.InGame => BGMType.InGame,
             SceneName.Result => BGMType.Result,
             _ => BGMType.None,

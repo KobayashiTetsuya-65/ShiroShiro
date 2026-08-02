@@ -54,7 +54,7 @@ public class SceneController : MonoBehaviour
 }
 public enum SceneName
 {
-    Title,
+    TitleScene,
     InGame,
     Result,
     Test_Futo,

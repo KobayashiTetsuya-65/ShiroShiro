@@ -1,13 +1,14 @@
 using System;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CountdownController : MonoBehaviour
 {
-    [SerializeField] private Image _countdownImage;
-    [SerializeField] private Sprite[] _numberSprites; 
-    [SerializeField] private Sprite _startSprite;      
+    [SerializeField] private TextMeshProUGUI _countdownText;
+
+    [SerializeField] private string[] _countdownTexts = { "3", "2", "1" };
+    [SerializeField] private string _startText = "START!";
 
     [SerializeField] private float _scaleUpDuration = 0.15f;
     [SerializeField] private float _holdDuration = 0.5f;
@@ -23,13 +24,13 @@ public class CountdownController : MonoBehaviour
 
     private void Awake()
     {
-        _canvasGroup = _countdownImage.GetComponent<CanvasGroup>();
+        _canvasGroup = _countdownText.GetComponent<CanvasGroup>();
         if (_canvasGroup == null)
         {
-            _canvasGroup = _countdownImage.gameObject.AddComponent<CanvasGroup>();
+            _canvasGroup = _countdownText.gameObject.AddComponent<CanvasGroup>();
         }
 
-        _countdownImage.gameObject.SetActive(false);
+        _countdownText.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -43,41 +44,51 @@ public class CountdownController : MonoBehaviour
     public void PlayCountdown()
     {
         GamePauseManager.SetPaused(true);
-        _countdownImage.gameObject.SetActive(true);
+        _countdownText.gameObject.SetActive(true);
 
-        DOTween.Kill(_countdownImage.transform);
+        DOTween.Kill(_countdownText.transform);
         DOTween.Kill(_canvasGroup);
 
         Sequence sequence = DOTween.Sequence();
         sequence.SetUpdate(true);
 
-        foreach (var sprite in _numberSprites)
+        foreach (var text in _countdownTexts)
         {
-            AppendStep(sequence, sprite, "a");
+            AppendStep(sequence, text);
         }
 
-        AppendStep(sequence, _startSprite, "a");
+        AppendStep(sequence, _startText);
 
         sequence.OnComplete(() =>
         {
-            _countdownImage.gameObject.SetActive(false);
+            _countdownText.gameObject.SetActive(false);
             GamePauseManager.SetPaused(false);
+            AudioManager.Instance.PlayBGM(BGMType.InGame);
             OnCountdownFinished?.Invoke();
         });
     }
 
-    private void AppendStep(Sequence sequence, Sprite sprite, string soundId)
+    private void AppendStep(Sequence sequence, string text)
     {
         sequence.AppendCallback(() =>
         {
-            _countdownImage.sprite = sprite;
-            _countdownImage.transform.localScale = _startScale;
+            _countdownText.text = text;
+            _countdownText.transform.localScale = _startScale;
             _canvasGroup.alpha = 1f;
         });
 
-        sequence.Append(_countdownImage.transform.DOScale(_punchScale, _scaleUpDuration).SetEase(Ease.OutBack));
-        sequence.Append(_countdownImage.transform.DOScale(Vector3.one, 0.1f));
+        sequence.Append(
+            _countdownText.transform
+                .DOScale(_punchScale, _scaleUpDuration)
+                .SetEase(Ease.OutBack));
+
+        sequence.Append(
+            _countdownText.transform
+                .DOScale(Vector3.one, 0.1f));
+
         sequence.AppendInterval(_holdDuration);
-        sequence.Append(_canvasGroup.DOFade(0f, _fadeOutDuration));
+
+        sequence.Append(
+            _canvasGroup.DOFade(0f, _fadeOutDuration));
     }
 }

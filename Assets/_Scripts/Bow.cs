@@ -58,6 +58,7 @@ public class Bow : MonoBehaviour
         if (ScoreManager.Instance.IsStop) return;
 
         _pressPos = _camera.ScreenToWorldPoint(_pointAction.ReadValue<Vector2>());
+        AudioManager.Instance.PlaySE(SEType.Bow);
 
         _isDragging = true;
         enabled = true;
@@ -73,6 +74,7 @@ public class Bow : MonoBehaviour
         enabled = false;
         if (_timer <= _grabTime) return;
         Vector2 pull = GetPullVector();
+        AudioManager.Instance.PlaySE(SEType.Arrow);
 
         if (_scoreManager.IsFever)
         {

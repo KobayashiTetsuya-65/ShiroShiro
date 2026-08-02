@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour, IHitable
 
     [Header("エネミーデータ")]
     [SerializeField] private EnemyStatusSO _enemyData;
+    [SerializeField] private bool _isFeverEnemy = false;
+    [SerializeField] private float _castleLineY = -3f;
 
     public void Initialize(int enemyID)
     {
@@ -26,16 +28,32 @@ public class Enemy : MonoBehaviour, IHitable
     {
         if(GamePauseManager.IsPaused) return;
         _enemyData.MoveStrategy.Move(this);
+        CheckCastle();
     }
 
     public void HitArrow()
     {
+        AudioManager.Instance.PlaySE(SEType.Hit);
         Return();
     }
 
     private void Return()
     {
         ScoreManager.Instance.AddScore(Score);
+        if(_isFeverEnemy)
+        {
+            ScoreManager.Instance.FeverTime();
+        }
         OnReturn?.Invoke(this);
+    }
+
+    private void CheckCastle()
+    {
+        if (transform.position.y <= _castleLineY)
+        {
+            Castle.Instance.TakeDamage(_enemyData.CastleDamage);
+            Debug.Log(Castle.Instance.CurrentHp);
+            OnReturn?.Invoke(this);
+        }
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d45f8291fb851b4fb1b9a284d194525, type: 3}
   m_Name: 02_EnemyData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
-  Score: 10
+  Score: 150
   MoveSpeed: 0.5
+  CastleDamage: 4
   MoveStrategy: {fileID: 11400000, guid: 8f75c5f7578c6394aa2ccce8668019d6, type: 2}
