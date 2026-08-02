@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour, IHitable
 
     private void Return()
     {
+        HitEffectManager.Instance.Play(transform.position);
         ScoreManager.Instance.AddScore(Score);
         if(_isFeverEnemy)
         {

@@ -280,6 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 79002305}
   - component: {fileID: 79002306}
+  - component: {fileID: 79002307}
   m_Layer: 5
   m_Name: BGMSttingSlider
   m_TagString: Untagged
@@ -360,6 +361,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &79002307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79002304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b2eb9f89daa2c418a41808514219ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSlider
+  _exposedName: BGM
 --- !u!1 &274185183
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348425018}
   - component: {fileID: 348425019}
+  - component: {fileID: 348425020}
   m_Layer: 5
   m_Name: SESettingSlider
   m_TagString: Untagged
@@ -587,6 +602,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &348425020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348425017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b2eb9f89daa2c418a41808514219ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeSlider
+  _exposedName: SE
 --- !u!1 &421312271
 GameObject:
   m_ObjectHideFlags: 0
@@ -3961,6 +3989,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 319358337957191282, guid: 41f5d61fe3cbc2a43804108dfd0a8991, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3433416947400378428, guid: dde0b1d32007a874aa00e09135015d1a, type: 2}
+    - target: {fileID: 8127210872484879868, guid: 41f5d61fe3cbc2a43804108dfd0a8991, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -806159534672172456, guid: dde0b1d32007a874aa00e09135015d1a, type: 2}
     - target: {fileID: 8154098206700074382, guid: 41f5d61fe3cbc2a43804108dfd0a8991, type: 3}
       propertyPath: m_Name
       value: AudioManager
