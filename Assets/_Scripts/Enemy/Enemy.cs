@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IHitable
     public int Score => _enemyData.Score;
     public EnemyStatusSO Data => _enemyData;
     public int EnemyID { get; private set; }
+    public float MoveTime;
 
     [Header("エネミーデータ")]
     [SerializeField] private EnemyStatusSO _enemyData;

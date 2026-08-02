@@ -57,5 +57,6 @@ public enum SceneName
     Title,
     InGame,
     Result,
-    Test_Futo
+    Test_Futo,
+    Test_Kobayashi
 }
